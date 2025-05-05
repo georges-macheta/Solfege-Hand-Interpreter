@@ -1,0 +1,348 @@
+/* Base styles */
+:root {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --primary-color: #4db6ac;
+  --secondary-color: #7e57c2;
+  --accent-color: #ff5722;
+  --card-bg: rgba(30, 30, 30, 0.5);
+  --gradient-primary: linear-gradient(135deg, #4db6ac, #26a69a);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Typography */
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 2.2rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+}
+
+h3 {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 0.8rem;
+}
+
+/* Layout */
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+  width: 100%;
+}
+
+header p {
+  opacity: 0.8;
+  margin-top: 0.5rem;
+}
+
+main {
+  width: 100%;
+  max-width: 1000px;
+  padding: 0 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Controls */
+.controls-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  background-color: var(--card-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.key-selector {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.key-selector label {
+  margin-right: 0.8rem;
+}
+
+select {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: var(--text-color);
+  border: 1px solid var(--primary-color);
+  padding: 0.5rem;
+  border-radius: 4px;
+  width: 140px;
+  outline: none;
+}
+
+select:focus {
+  border-color: var(--accent-color);
+}
+
+.button-container {
+  display: flex;
+  gap: 1rem;
+}
+
+button {
+  background-color: var(--primary-color);
+  color: #121212;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #26a69a;
+}
+
+#help-button {
+  background-color: var(--secondary-color);
+}
+
+#help-button:hover {
+  background-color: #673ab7;
+}
+
+/* Canvas */
+#canvas-container {
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 4/3;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#camera-prompt {
+  text-align: center;
+  padding: 2rem;
+}
+
+#canvas-container canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Info panels */
+.info-container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.detection-card, .status-card {
+  flex: 1;
+  min-width: 250px;
+  background-color: var(--card-bg);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+#current-sign {
+  font-size: 2.5rem;
+  text-align: center;
+  font-weight: bold;
+  color: var(--accent-color);
+  margin: 0.5rem 0;
+}
+
+#current-note {
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.status-dot.active {
+  background-color: #4caf50;
+}
+
+.status-dot.loading {
+  background-color: #ffc107;
+}
+
+.status-dot.inactive {
+  background-color: #f44336;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: auto;
+}
+
+.modal-content {
+  background-color: #1a1a1a;
+  margin: 5% auto;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.close-modal {
+  color: var(--primary-color);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.instruction-section {
+  margin-bottom: 2rem;
+}
+
+.instruction-section:last-child {
+  margin-bottom: 0;
+}
+
+ol, ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Hand signs grid */
+.hand-signs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.hand-sign-item {
+  background-color: rgba(30, 30, 30, 0.8);
+  padding: 0.8rem;
+  border-radius: 4px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.sign-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.sign-name {
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.sign-desc {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.sign-emoji {
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  font-size: 1.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .controls-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .key-selector, .button-container {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .key-selector {
+    margin-bottom: 1rem;
+  }
+  
+  .button-container {
+    flex-wrap: wrap;
+  }
+  
+  button {
+    flex: 1;
+    min-width: 120px;
+  }
+  
+  .hand-signs-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

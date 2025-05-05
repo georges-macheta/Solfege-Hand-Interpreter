@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solfege Hand Sign Interpreter</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
+
+  <script src="https://unpkg.com/ml5@0.12.2/dist/ml5.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+  
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Solfege Hand Sign Interpreter</h1>
+    <p>Use hand signs to create music with your webcam</p>
+  </header>
+
+  <main>
+    <div class="controls-container">
+      <div class="key-selector">
+        <label for="key-select">Musical Key:</label>
+        <select id="key-select">
+          <option value="C">C Major</option>
+          <option value="D">D Major</option>
+          <option value="E">E Major</option>
+          <option value="F">F Major</option>
+          <option value="G">G Major</option>
+          <option value="A">A Major</option>
+          <option value="B">B Major</option>
+        </select>
+      </div>
+      
+      <div class="button-container">
+        <button id="start-camera">Start Camera</button>
+        <button id="help-button">Help</button>
+      </div>
+    </div>
+
+    <div id="canvas-container">
+      <!-- p5.js canvas will be added here -->
+      <div id="camera-prompt">
+        <p>Click "Start Camera" to begin</p>
+      </div>
+    </div>
+
+    <div class="info-container">
+      <div class="detection-card">
+        <h3>Detected Sign</h3>
+        <div id="current-sign">-</div>
+        <div id="current-note">No note detected</div>
+      </div>
+      
+      <div class="status-card">
+        <h3>Status</h3>
+        <div class="status-item">
+          <span id="model-status" class="status-dot loading"></span>
+          <span id="model-text">Loading model...</span>
+        </div>
+        <div class="status-item">
+          <span id="hand-status" class="status-dot inactive"></span>
+          <span id="hand-text">No hand detected</span>
+        </div>
+      </div>
+    </div>
+
+ 
+    <div id="help-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>How to Use</h2>
+          <span class="close-modal">&times;</span>
+        </div>
+        
+        <div class="modal-body">
+          <div class="instruction-section">
+            <h3>Getting Started</h3>
+            <ol>
+              <li>Click "Start Camera" to turn on your webcam</li>
+              <li>Position your hand in view of the camera</li>
+              <li>Select a musical key from the dropdown</li>
+              <li>Make hand signs to play corresponding notes</li>
+            </ol>
+          </div>
+
+          <div class="instruction-section">
+            <h3>Solfege Hand Signs</h3>
+            <div class="hand-signs-grid">
+              <div class="hand-sign-item">
+                <div class="sign-header">
+                  <span class="sign-name">Do</span>
+                  <span class="sign-desc">Index only</span>
+                </div>
+                <div class="sign-emoji">👆</div>
+              </div>
+              <div class="hand-sign-item">
+                <div class="sign-header">
+                  <span class="sign-name">Re</span>
+                  <span class="sign-desc">Index + Middle</span>
+                </div>
+                <div class="sign-emoji">✌️</div>
+              </div>
+              <div class="hand-sign-item">
+                <div class="sign-header">
+                  <span class="sign-name">Mi</span>
+                  <span class="sign-desc">Index + Middle + Ring</span>
+                </div>
+                <div class="sign-emoji">🖖</div>
+              </div>
+              <div class="hand-sign-item">
+                <div class="sign-header">
+                  <span class="sign-name">Fa</span>
+                  <span class="sign-desc">All except thumb</span>
+                </div>
+                <div class="sign-emoji">🖖</div>
+              </div>
+              <div class="hand-sign-item">
+                <div class="sign-header">
+                  <span class="sign-name">Sol</span>
+                  <span class="sign-desc">All five fingers</span>
+                </div>
+                <div class="sign-emoji">🖐️</div>
+              </div>
+              <div class="hand-sign-item">
+                <div class="sign-header">
+                  <span class="sign-name">La</span>
+                  <span class="sign-desc">All except middle</span>
+                </div>
+                <div class="sign-emoji">🤘</div>
+              </div>
+              <div class="hand-sign-item full-width">
+                <div class="sign-header">
+                  <span class="sign-name">Ti</span>
+                  <span class="sign-desc">Middle + Ring + Pinky</span>
+                </div>
+                <div class="sign-emoji">🤟</div>
+              </div>
+              <div class="hand-sign-item full-width">
+                <div class="sign-header">
+                  <span class="sign-name">High Do</span>
+                  <span class="sign-desc">Thumb + Pinky</span>
+                </div>
+                <div class="sign-emoji">🤟</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="instruction-section">
+            <h3>Tips</h3>
+            <ul>
+              <li>Ensure good lighting for better hand detection</li>
+              <li>Hold your hand approximately 1-2 feet from the camera</li>
+              <li>Make clear, distinct hand signs</li>
+              <li>Avoid rapid movements for more accurate detection</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  
+  <script src="sketch.js"></script>
+</body>
+</html>
